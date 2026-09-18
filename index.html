@@ -2,316 +2,348 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Flores Para Ti</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FELIZ DIA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --neon-yellow:#fff34d;
-    --neon-glow:#ffe600;
+    --noche:#0a0d07;
+    --noche-2:#141a0d;
+    --oro:#ffd524;
+    --oro-claro:#fff2a8;
+    --petalo-a:#ffdb3d;
+    --petalo-b:#f0a91c;
+    --corazon:#3d2410;
+    --papel:#f3b8c4;
+    --papel-hondo:#c9788d;
+    --crema:#f7d9b8;
+    --hierba:#2f6b1f;
+    --texto:#ffeeb8;
   }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html,body{
-    height:100%; width:100%;
-    background:radial-gradient(ellipse at 50% 0%, #2b2a52 0%, #1a1836 40%, #0f0e24 100%);
-    font-family:'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-    overflow:hidden;
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--noche);
+    font-family:'Quicksand',system-ui,-apple-system,'Segoe UI',sans-serif;
+    color:var(--texto);
+    display:flex;justify-content:center;
+    overflow-x:hidden;
   }
-  .card{
+  .escena{
     position:relative;
-    width:100%;
-    max-width:420px;
-    height:100vh;
-    height:100dvh;
-    height:100svh;
-    margin:0 auto;
+    width:100%;max-width:430px;min-height:100vh;
+    background:
+      radial-gradient(120% 70% at 50% 100%, #1d2a11 0%, rgba(13,18,8,0) 60%),
+      radial-gradient(100% 60% at 50% 0%, #1a2210 0%, rgba(10,13,7,0) 70%),
+      var(--noche);
+    display:flex;flex-direction:column;align-items:center;
+    padding:26px 14px 30px;
     overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding:0 4vw;
-    padding-bottom:max(14px, env(safe-area-inset-bottom));
   }
 
-  /* --- Cielo con estrellas --- */
-  .stars{
-    position:absolute;
-    inset:0;
-    z-index:0;
-  }
-  .star{
-    position:absolute;
-    color:#ffe066;
-    font-size:10px;
+  /* ---------- luciérnagas / destellos ---------- */
+  .destellos{position:absolute;inset:0;pointer-events:none}
+  .chispa{
+    position:absolute;border-radius:50%;
+    background:var(--oro-claro);
+    box-shadow:0 0 6px 1px rgba(255,213,36,.75);
     opacity:0;
-    animation:twinkle ease-in-out infinite;
-    filter:drop-shadow(0 0 4px #ffe066);
+    animation:brillar var(--d) ease-in-out infinite;
+    animation-delay:var(--r);
   }
-  @keyframes twinkle{
-    0%,100%{ opacity:0; transform:scale(0.5) rotate(0deg); }
-    50%{ opacity:1; transform:scale(1.1) rotate(20deg); }
+  @keyframes brillar{
+    0%,100%{opacity:0;transform:scale(.4)}
+    50%{opacity:.95;transform:scale(1)}
   }
 
-  /* --- Titulo neon --- */
-  .title-wrap{
-    position:relative;
-    z-index:2;
+  /* ---------- título ---------- */
+  .titulo{
+    font-family:'Dancing Script',cursive;
+    font-weight:700;
+    font-size:clamp(30px,8.6vw,38px);
+    line-height:1.18;
     text-align:center;
-    margin-top:4vh;
-    max-width:100%;
+    color:var(--oro);
+    text-shadow:0 0 12px rgba(255,190,20,.55), 0 0 34px rgba(255,150,0,.3);
+    letter-spacing:.5px;
+    z-index:3;
+    animation:latir 4.5s ease-in-out infinite;
   }
-  .neon-title{
-    font-size:clamp(18px, 6.5vw, 34px);
-    font-weight:800;
-    color:#fff9c4;
-    text-shadow:
-      0 0 6px var(--neon-glow),
-      0 0 14px var(--neon-glow),
-      0 0 26px #ffcc00,
-      0 0 46px #ff9d00;
-    letter-spacing:0.5px;
-    animation:flicker 3.4s infinite;
-    line-height:1.25;
-  }
-  @keyframes flicker{
-    0%,19%,21%,23%,54%,56%,100%{
-      text-shadow:
-        0 0 6px var(--neon-glow),
-        0 0 14px var(--neon-glow),
-        0 0 26px #ffcc00,
-        0 0 46px #ff9d00;
-      opacity:1;
-    }
-    20%,22%,55%{ opacity:0.55; text-shadow:none; }
-  }
-  .emoji-sun{
-    display:inline-block;
-    font-size:clamp(20px, 6vw, 30px);
-    animation:spinSlow 6s linear infinite;
-    filter:drop-shadow(0 0 10px #ffe066);
-  }
-  @keyframes spinSlow{
-    from{ transform:rotate(0deg); }
-    to{ transform:rotate(360deg); }
+  @keyframes latir{
+    0%,100%{text-shadow:0 0 12px rgba(255,190,20,.5),0 0 32px rgba(255,150,0,.25)}
+    50%{text-shadow:0 0 18px rgba(255,210,60,.85),0 0 52px rgba(255,160,0,.45)}
   }
 
-  /* --- Mensaje --- */
-  .message{
-    position:relative;
-    z-index:2;
-    margin-top:18px;
-    color:#fff;
-    font-size:clamp(14px, 4.2vw, 17px);
-    font-weight:600;
-    text-align:center;
-    text-shadow:0 0 10px rgba(255,224,102,0.5);
+  /* ---------- ramo ---------- */
+  .ramo{width:100%;max-width:400px;margin-top:-6px;flex:1;display:flex;align-items:center}
+  svg.ramo-svg{width:100%;height:auto;display:block;overflow:visible}
+
+  .tallo-flor{transform-box:fill-box;transform-origin:50% 90%;
+    animation:mecer var(--dur,6s) ease-in-out infinite alternate;
+    animation-delay:var(--delay,0s)}
+  @keyframes mecer{from{transform:rotate(-3.5deg)}to{transform:rotate(3.5deg)}}
+
+  .hoja{transform-box:fill-box;transform-origin:50% 100%;
+    animation:hojear var(--dur,5s) ease-in-out infinite alternate;
+    animation-delay:var(--delay,0s)}
+  @keyframes hojear{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+
+  /* flores flotantes de los costados */
+  .flotante{position:absolute;pointer-events:none;
+    animation:flotar var(--dur,9s) ease-in-out infinite alternate;
+    animation-delay:var(--delay,0s)}
+  @keyframes flotar{
+    from{transform:translate3d(0,0,0) rotate(-8deg)}
+    to{transform:translate3d(-10px,-22px,0) rotate(10deg)}
   }
 
-  /* --- Ramo de girasoles --- */
-  .bouquet-wrap{
-    position:relative;
-    z-index:2;
-    margin-top:auto;
-    margin-bottom:0;
-    width:100%;
-    display:flex;
-    justify-content:center;
-    align-items:flex-end;
-    flex:1;
-    min-height:0;
-    max-height:62vh;
-    padding-bottom:6px;
+  /* ---------- botón ---------- */
+  .abreme{
+    position:relative;z-index:4;margin-top:6px;
+    display:inline-flex;align-items:center;gap:12px;
+    padding:11px 30px 13px;
+    border:1px solid rgba(255,206,64,.55);
+    border-radius:999px;
+    background:linear-gradient(180deg,#4a2f14 0%,#2a1809 100%);
+    color:var(--oro-claro);
+    font-family:'Dancing Script',cursive;font-weight:700;font-size:25px;
+    cursor:pointer;
+    box-shadow:0 0 22px rgba(255,170,20,.28), inset 0 1px 0 rgba(255,220,120,.25);
+    animation:respirar 2.8s ease-in-out infinite;
+    transition:transform .18s ease;
   }
-  .bouquet{
-    position:relative;
-    width:340px;
-    height:380px;
-    transform-origin:bottom center;
+  .abreme:hover{transform:translateY(-2px)}
+  .abreme:active{transform:translateY(1px) scale(.98)}
+  .abreme:focus-visible{outline:2px solid var(--oro);outline-offset:4px}
+  .abreme .sobre{font-size:20px;filter:drop-shadow(0 0 6px rgba(255,200,60,.6))}
+  @keyframes respirar{
+    0%,100%{box-shadow:0 0 18px rgba(255,170,20,.22), inset 0 1px 0 rgba(255,220,120,.2)}
+    50%{box-shadow:0 0 34px rgba(255,190,50,.55), inset 0 1px 0 rgba(255,220,120,.35)}
   }
-  .flower{
-    position:absolute;
-    transform-origin:bottom center;
+
+  /* ---------- carta ---------- */
+  .velo{
+    position:fixed;inset:0;z-index:20;
+    background:rgba(6,8,4,.86);
+    backdrop-filter:blur(3px);
+    display:flex;align-items:center;justify-content:center;padding:22px;
+    opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s;
   }
-  .stem-line{
-    position:absolute;
-    bottom:0;
-    left:50%;
-    width:5px;
-    background:linear-gradient(180deg,#4f9a2b,#2f6b1f);
-    transform:translateX(-50%);
-    border-radius:3px;
+  .velo.abierta{opacity:1;visibility:visible}
+  .carta{
+    width:100%;max-width:330px;
+    background:linear-gradient(170deg,#fff7e2,#f6dfae);
+    color:#4a3410;border-radius:16px;
+    padding:28px 24px 22px;text-align:center;
+    box-shadow:0 22px 60px rgba(0,0,0,.6), 0 0 0 1px rgba(255,214,90,.5);
+    transform:translateY(24px) scale(.9);opacity:0;
+    transition:transform .45s cubic-bezier(.2,.9,.3,1.3), opacity .35s ease;
   }
-  .bloom{
-    position:absolute;
-    left:50%;
-    animation:sway 3.6s ease-in-out infinite;
-    transform-origin:center bottom;
+  .velo.abierta .carta{transform:none;opacity:1}
+  .carta h2{font-family:'Dancing Script',cursive;font-size:32px;color:#a5651a;margin-bottom:10px}
+  .carta p{font-size:15.5px;line-height:1.65;margin-bottom:8px}
+  .firma{font-family:'Dancing Script',cursive;font-size:22px;color:#8d5a16;margin-top:12px}
+  .cerrar{
+    margin-top:18px;border:0;border-radius:999px;cursor:pointer;
+    padding:10px 24px;font-family:'Quicksand',sans-serif;font-weight:600;font-size:14px;
+    background:#4a2f14;color:#ffe9a8;
   }
-  @keyframes sway{
-    0%,100%{ transform:rotate(-2deg); }
-    50%{ transform:rotate(2deg); }
+  .cerrar:focus-visible{outline:2px solid #a5651a;outline-offset:3px}
+
+  /* pétalos que caen al abrir */
+  .petalo-cae{position:fixed;top:-40px;z-index:19;pointer-events:none;
+    animation:caer var(--dur) linear forwards}
+  @keyframes caer{
+    to{transform:translateY(110vh) rotate(var(--giro));opacity:0}
   }
-  .petal2{
-    position:absolute;
-    background:radial-gradient(circle at 35% 25%, #fff6b0, #ffd400 55%, #ffb300 100%);
-    box-shadow:0 0 10px rgba(255,215,0,0.55);
-  }
-  .core{
-    position:absolute;
-    border-radius:50%;
-    background:radial-gradient(circle at 38% 32%, #7a4d26, #3d260f 75%);
-    box-shadow:inset -4px -4px 8px rgba(0,0,0,0.5), 0 0 8px rgba(0,0,0,0.4);
-  }
-  .leaf-big{
-    position:absolute;
-    background:linear-gradient(135deg,#5cae34,#2f6b1f);
-    border-radius:0 85% 0 85%;
-    opacity:0.95;
-  }
-  .glow-ring{
-    position:absolute;
-    inset:-40%;
-    background:radial-gradient(circle, rgba(255,224,102,0.28) 0%, rgba(255,224,102,0) 70%);
-    z-index:-1;
-    animation:pulseGlow 3.6s ease-in-out infinite;
-  }
-  @keyframes pulseGlow{
-    0%,100%{ opacity:0.5; transform:scale(0.9); }
-    50%{ opacity:1; transform:scale(1.15); }
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
   }
 </style>
 </head>
 <body>
-<div class="card">
-  <div class="stars" id="stars"></div>
+<div class="escena">
+  <div class="destellos" id="destellos"></div>
 
-  <div class="title-wrap">
-    <div class="neon-title">Feliz 21 de<br>Setiembre <span class="emoji-sun">🌻</span></div>
+  <h1 class="titulo">FELIZ DIA MI CHANCHITA HERMOSA ❤️</h1>
+
+  <div class="ramo">
+    <svg class="ramo-svg" viewBox="0 0 400 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ramo de girasoles">
+      <defs>
+        <radialGradient id="petalo" cx="50%" cy="15%" r="85%">
+          <stop offset="0%" stop-color="#fff0a0"/>
+          <stop offset="45%" stop-color="var(--petalo-a)"/>
+          <stop offset="100%" stop-color="var(--petalo-b)"/>
+        </radialGradient>
+        <radialGradient id="petalo2" cx="50%" cy="20%" r="85%">
+          <stop offset="0%" stop-color="#ffd85a"/>
+          <stop offset="100%" stop-color="#d88f12"/>
+        </radialGradient>
+        <radialGradient id="corazon" cx="38%" cy="32%" r="75%">
+          <stop offset="0%" stop-color="#6b4620"/>
+          <stop offset="55%" stop-color="#4a2c11"/>
+          <stop offset="100%" stop-color="#2a1708"/>
+        </radialGradient>
+        <linearGradient id="papel" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f7c6d2" stop-opacity=".92"/>
+          <stop offset="100%" stop-color="var(--papel-hondo)" stop-opacity=".78"/>
+        </linearGradient>
+        <linearGradient id="papel2" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#ffd8c0" stop-opacity=".95"/>
+          <stop offset="100%" stop-color="#e5a37f" stop-opacity=".85"/>
+        </linearGradient>
+        <linearGradient id="hierba" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stop-color="#1c4a12"/>
+          <stop offset="100%" stop-color="#57a52e"/>
+        </linearGradient>
+        <pattern id="semillas" width="9" height="9" patternUnits="userSpaceOnUse">
+          <circle cx="2.5" cy="2.5" r="1.5" fill="#1d0f04" opacity=".55"/>
+          <circle cx="7" cy="7" r="1.5" fill="#1d0f04" opacity=".45"/>
+        </pattern>
+      </defs>
+
+      <!-- hierba del fondo -->
+      <g id="hierbas"></g>
+
+      <!-- envoltorio -->
+      <g id="envoltorio">
+        <path d="M200 452 L56 262 Q112 288 152 276 Z" fill="url(#papel)"/>
+        <path d="M200 452 L344 262 Q288 288 248 276 Z" fill="url(#papel)"/>
+        <path d="M200 452 L92 234 Q140 276 176 268 Z" fill="url(#papel)" opacity=".75"/>
+        <path d="M200 452 L308 234 Q260 276 224 268 Z" fill="url(#papel)" opacity=".75"/>
+        <path d="M148 268 L252 268 L216 452 L184 452 Z" fill="url(#papel2)"/>
+        <path d="M200 268 L200 452" stroke="#c98a68" stroke-width="1.6" opacity=".5"/>
+        <path d="M172 270 L190 452" stroke="#c98a68" stroke-width="1.2" opacity=".35"/>
+        <path d="M228 270 L210 452" stroke="#c98a68" stroke-width="1.2" opacity=".35"/>
+        <path d="M148 268 Q200 286 252 268" fill="none" stroke="#ffe3c9" stroke-width="2" opacity=".55"/>
+      </g>
+
+      <!-- hojas -->
+      <g id="hojas"></g>
+      <!-- girasoles -->
+      <g id="flores"></g>
+    </svg>
   </div>
 
-  <div class="message">Mi chanchita preciosa ❤️</div>
+  <button class="abreme" id="abreme">
+    <span class="sobre">✉️</span><span>Ábreme</span>
+  </button>
+</div>
 
-  <div class="bouquet-wrap">
-    <div class="bouquet" id="bouquet"></div>
+<div class="velo" id="velo" role="dialog" aria-modal="true" aria-labelledby="tituloCarta">
+  <div class="carta">
+    <h2 id="tituloCarta">Para ti 🌻</h2>
+    <p>Hoy las flores amarillas son solo el pretexto, la razón de verdad eres tú: por ser como eres, por cómo mejoras cualquier día pesado con solo estar y por la tranquilidad que me da compartir el tiempo contigo.</p>
+    <p>Las flores suelen marchitarse, pero quiero que este detalle se quede contigo como un recordatorio simple de que me importas, te elijo y te quiero de verdad.</p>
+    <p class="firma">Con amor 💛</p>
+    <button class="cerrar" id="cerrar">Cerrar la carta</button>
   </div>
 </div>
 
 <script>
-  // --- Estrellas ---
-  const starsLayer = document.getElementById('stars');
-  const starChars = ['✦','✧','⋆','✶'];
-  for(let i=0;i<40;i++){
-    const s = document.createElement('div');
-    s.className = 'star';
-    s.textContent = starChars[Math.floor(Math.random()*starChars.length)];
-    s.style.left = Math.random()*100 + '%';
-    s.style.top = Math.random()*70 + '%';
-    s.style.fontSize = (8 + Math.random()*10) + 'px';
-    s.style.animationDuration = (1.8 + Math.random()*3) + 's';
-    s.style.animationDelay = (Math.random()*4) + 's';
-    starsLayer.appendChild(s);
+(function(){
+  /* ---------- destellos ---------- */
+  const cajaDestellos = document.getElementById('destellos');
+  for(let i=0;i<70;i++){
+    const s=document.createElement('span');
+    const t=Math.random()*2.4+1;
+    s.className='chispa';
+    s.style.left=Math.random()*100+'%';
+    s.style.top=Math.random()*100+'%';
+    s.style.width=s.style.height=t+'px';
+    s.style.setProperty('--d',(2+Math.random()*4).toFixed(2)+'s');
+    s.style.setProperty('--r','-'+(Math.random()*6).toFixed(2)+'s');
+    cajaDestellos.appendChild(s);
   }
 
-  // --- Ramo de girasoles ---
-  const bouquet = document.getElementById('bouquet');
-  const flowerSpecs = [
-    { x:160, h:220, s:1.15, delay:0 },
-    { x:70,  h:195, s:0.92, delay:0.3 },
-    { x:250, h:198, s:0.94, delay:0.6 },
-    { x:15,  h:160, s:0.75, delay:0.9 },
-    { x:305, h:165, s:0.76, delay:1.1 },
-    { x:115, h:145, s:0.68, delay:1.4 },
-    { x:205, h:145, s:0.68, delay:1.6 },
-  ];
-
-  // Hojas y tallos base del ramo
-  for(let i=0;i<5;i++){
-    const leaf = document.createElement('div');
-    leaf.className = 'leaf-big';
-    const lw = 70 + Math.random()*40, lh = 105 + Math.random()*40;
-    leaf.style.width = lw+'px';
-    leaf.style.height = lh+'px';
-    leaf.style.bottom = '0px';
-    leaf.style.left = (55 + i*50) + 'px';
-    leaf.style.transform = `rotate(${(i%2===0?-1:1)*(20+Math.random()*15)}deg)`;
-    bouquet.appendChild(leaf);
-  }
-
-  flowerSpecs.forEach(spec=>{
-    const flower = document.createElement('div');
-    flower.className = 'flower';
-    flower.style.left = spec.x + 'px';
-    flower.style.bottom = '0px';
-
-    const stem = document.createElement('div');
-    stem.className = 'stem-line';
-    stem.style.height = spec.h + 'px';
-    flower.appendChild(stem);
-
-    const bloom = document.createElement('div');
-    bloom.className = 'bloom';
-    bloom.style.bottom = spec.h + 'px';
-    bloom.style.left = '2.5px';
-    bloom.style.width = '0px';
-    bloom.style.height = '0px';
-    bloom.style.animationDelay = spec.delay + 's';
-
-    const glow = document.createElement('div');
-    glow.className = 'glow-ring';
-    bloom.appendChild(glow);
-
-    const petalCount = 12;
-    const petalLen = 82 * spec.s;
-    const petalWide = 27 * spec.s;
-    const radius = 7;
-
-    for(let i=0;i<petalCount;i++){
-      const angleDeg = i * (360/petalCount);
-      const angleRad = angleDeg * Math.PI/180;
-      const petal = document.createElement('div');
-      petal.className = 'petal2';
-      petal.style.width = petalLen+'px';
-      petal.style.height = petalWide+'px';
-      petal.style.left = (-petalLen/2)+'px';
-      petal.style.top = (-petalWide/2)+'px';
-      petal.style.borderRadius = '50% 50% 50% 50% / 60% 60% 40% 40%';
-      const x = Math.cos(angleRad)*radius;
-      const y = Math.sin(angleRad)*radius;
-      petal.style.transform = `translate(${x}px,${y}px) rotate(${angleDeg}deg)`;
-      bloom.appendChild(petal);
+  /* ---------- girasol ---------- */
+  function girasol(cx,cy,r,i){
+    const n = r>34 ? 20 : 14;
+    let capa1='',capa2='';
+    for(let k=0;k<n;k++){
+      const a=k*(360/n);
+      capa2+=`<ellipse cx="0" cy="${-r*0.60}" rx="${(r*0.16).toFixed(1)}" ry="${(r*0.40).toFixed(1)}" fill="url(#petalo2)" transform="rotate(${a+360/n/2})"/>`;
+      capa1+=`<ellipse cx="0" cy="${-r*0.70}" rx="${(r*0.17).toFixed(1)}" ry="${(r*0.44).toFixed(1)}" fill="url(#petalo)" transform="rotate(${a})"/>`;
     }
+    return `<g transform="translate(${cx} ${cy})">
+      <g class="tallo-flor" style="--dur:${(5+Math.random()*3).toFixed(2)}s;--delay:-${(Math.random()*4).toFixed(2)}s">
+        ${capa2}${capa1}
+        <circle r="${r*0.44}" fill="url(#corazon)"/>
+        <circle r="${r*0.44}" fill="url(#semillas)" opacity=".6"/>
+        <circle r="${r*0.44}" fill="none" stroke="#e0a53a" stroke-width="${(r*0.055).toFixed(1)}" opacity=".55"/>
+        <ellipse cx="${-r*0.16}" cy="${-r*0.18}" rx="${r*0.13}" ry="${r*0.09}" fill="#8a5c2c" opacity=".35"/>
+      </g></g>`;
+  }
 
-    const core = document.createElement('div');
-    core.className = 'core';
-    const cs = 48*spec.s;
-    core.style.width = cs+'px';
-    core.style.height = cs+'px';
-    core.style.left = (-cs/2)+'px';
-    core.style.top = (-cs/2)+'px';
-    bloom.appendChild(core);
+  const flores=[
+    [118,206,62],[214,166,64],[302,214,56],
+    [162,286,64],[262,294,60],[318,120,30],[86,150,22]
+  ];
+  document.getElementById('flores').innerHTML = flores.map((f,i)=>girasol(f[0],f[1],f[2],i)).join('');
 
-    flower.appendChild(bloom);
-    bouquet.appendChild(flower);
+  /* ---------- hierba ---------- */
+  let hierba='';
+  for(let i=0;i<26;i++){
+    const x=10+Math.random()*380;
+    const h=40+Math.random()*95;
+    const inc=(Math.random()-.5)*60;
+    hierba+=`<path class="hoja" style="--dur:${(4+Math.random()*3).toFixed(2)}s;--delay:-${(Math.random()*3).toFixed(2)}s"
+      d="M${x} 470 Q${x+inc/2} ${470-h*0.6} ${x+inc} ${470-h}"
+      stroke="url(#hierba)" stroke-width="${(2+Math.random()*2.4).toFixed(1)}" fill="none" stroke-linecap="round" opacity=".9"/>`;
+  }
+  document.getElementById('hierbas').innerHTML=hierba;
+
+  /* ---------- hojas del ramo ---------- */
+  document.getElementById('hojas').innerHTML=`
+    <path class="hoja" style="--dur:5.5s" d="M170 330 Q120 320 96 356 Q140 372 170 342 Z" fill="#3f8b26" opacity=".9"/>
+    <path class="hoja" style="--dur:6.2s;--delay:-1.4s" d="M234 336 Q288 326 312 362 Q266 378 234 348 Z" fill="#357a20" opacity=".9"/>`;
+
+  /* ---------- flores flotantes ---------- */
+  const escena=document.querySelector('.escena');
+  const sitios=[[88,6],[70,92],[8,74],[86,46],[12,26]];
+  sitios.forEach((p,i)=>{
+    const d=document.createElement('div');
+    d.className='flotante';
+    d.style.left=p[0]+'%';d.style.top=p[1]+'%';
+    d.style.setProperty('--dur',(7+Math.random()*5).toFixed(2)+'s');
+    d.style.setProperty('--delay','-'+(Math.random()*5).toFixed(2)+'s');
+    const t=16+Math.random()*12;
+    d.innerHTML=`<svg width="${t*2}" height="${t*2}" viewBox="-40 -40 80 80">${
+      Array.from({length:12},(_,k)=>`<ellipse cx="0" cy="-24" rx="6" ry="14" fill="url(#petalo)" transform="rotate(${k*30})"/>`).join('')
+    }<circle r="11" fill="#3d2410"/></svg>`;
+    escena.appendChild(d);
   });
 
-  // --- Reescalar el ramo para que siempre quepa en pantalla (móvil incluido) ---
-  function fitBouquet(){
-    const wrap = document.querySelector('.bouquet-wrap');
-    const availW = wrap.clientWidth * 0.94;
-    const availH = wrap.clientHeight * 0.98;
-    const baseW = 340, baseH = 380;
-    const scale = Math.min(1, availW / baseW, availH / baseH);
-    bouquet.style.transform = `scale(${scale})`;
-  }
-  window.addEventListener('resize', fitBouquet);
-  window.addEventListener('orientationchange', fitBouquet);
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', fitBouquet);
-    window.visualViewport.addEventListener('scroll', fitBouquet);
-  }
-  fitBouquet();
-  window.addEventListener('load', fitBouquet);
-  setTimeout(fitBouquet, 300);
-  setTimeout(fitBouquet, 1000);
+  /* ---------- carta ---------- */
+  const velo=document.getElementById('velo');
+  const btn=document.getElementById('abreme');
+  const cerrar=document.getElementById('cerrar');
 
+  function lluviaPetalos(){
+    for(let i=0;i<26;i++){
+      const p=document.createElement('div');
+      p.className='petalo-cae';
+      p.style.left=Math.random()*100+'vw';
+      p.style.setProperty('--dur',(4+Math.random()*4).toFixed(2)+'s');
+      p.style.setProperty('--giro',(Math.random()*720-360)+'deg');
+      p.style.animationDelay=(Math.random()*2.5).toFixed(2)+'s';
+      const s=10+Math.random()*10;
+      p.innerHTML=`<svg width="${s}" height="${s*1.9}" viewBox="0 0 20 38"><ellipse cx="10" cy="19" rx="8" ry="18" fill="#ffd24a"/></svg>`;
+      document.body.appendChild(p);
+      setTimeout(()=>p.remove(),9000);
+    }
+  }
+  function abrir(){velo.classList.add('abierta');cerrar.focus();lluviaPetalos();}
+  function cerrarCarta(){velo.classList.remove('abierta');btn.focus();}
+
+  btn.addEventListener('click',abrir);
+  cerrar.addEventListener('click',cerrarCarta);
+  velo.addEventListener('click',e=>{if(e.target===velo)cerrarCarta();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')cerrarCarta();});
+})();
 </script>
 </body>
 </html>
