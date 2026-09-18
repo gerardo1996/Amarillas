@@ -21,12 +21,14 @@
     max-width:420px;
     height:100vh;
     height:100dvh;
+    height:100svh;
     margin:0 auto;
     overflow:hidden;
     display:flex;
     flex-direction:column;
     align-items:center;
     padding:0 4vw;
+    padding-bottom:max(14px, env(safe-area-inset-bottom));
   }
 
   /* --- Cielo con estrellas --- */
@@ -53,10 +55,11 @@
     position:relative;
     z-index:2;
     text-align:center;
-    margin-top:6vh;
+    margin-top:4vh;
+    max-width:100%;
   }
   .neon-title{
-    font-size:clamp(24px, 8vw, 34px);
+    font-size:clamp(18px, 6.5vw, 34px);
     font-weight:800;
     color:#fff9c4;
     text-shadow:
@@ -64,9 +67,9 @@
       0 0 14px var(--neon-glow),
       0 0 26px #ffcc00,
       0 0 46px #ff9d00;
-    letter-spacing:1px;
+    letter-spacing:0.5px;
     animation:flicker 3.4s infinite;
-    line-height:1.15;
+    line-height:1.25;
   }
   @keyframes flicker{
     0%,19%,21%,23%,54%,56%,100%{
@@ -114,6 +117,8 @@
     align-items:flex-end;
     flex:1;
     min-height:0;
+    max-height:62vh;
+    padding-bottom:6px;
   }
   .bouquet{
     position:relative;
@@ -179,10 +184,10 @@
   <div class="stars" id="stars"></div>
 
   <div class="title-wrap">
-    <div class="neon-title">FELIZ 21 DE SETIEMBRE <span class="emoji-sun">🌻</span> <br>MI CHANCHITA PRECIOSA ❤️</div>
+    <div class="neon-title">Feliz 21 de<br>Setiembre <span class="emoji-sun">🌻</span></div>
   </div>
 
-
+  <div class="message">Mi chanchita preciosa ❤️</div>
 
   <div class="bouquet-wrap">
     <div class="bouquet" id="bouquet"></div>
@@ -298,8 +303,14 @@
   }
   window.addEventListener('resize', fitBouquet);
   window.addEventListener('orientationchange', fitBouquet);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', fitBouquet);
+    window.visualViewport.addEventListener('scroll', fitBouquet);
+  }
   fitBouquet();
   window.addEventListener('load', fitBouquet);
+  setTimeout(fitBouquet, 300);
+  setTimeout(fitBouquet, 1000);
 
 </script>
 </body>
