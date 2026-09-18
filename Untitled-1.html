@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Flores Para Ti</title>
+<style>
+  :root{
+    --neon-yellow:#fff34d;
+    --neon-glow:#ffe600;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{
+    height:100%; width:100%;
+    background:radial-gradient(ellipse at 50% 0%, #2b2a52 0%, #1a1836 40%, #0f0e24 100%);
+    font-family:'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow:hidden;
+  }
+  .card{
+    position:relative;
+    width:100%;
+    max-width:420px;
+    height:100vh;
+    height:100dvh;
+    margin:0 auto;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:0 4vw;
+  }
+
+  /* --- Cielo con estrellas --- */
+  .stars{
+    position:absolute;
+    inset:0;
+    z-index:0;
+  }
+  .star{
+    position:absolute;
+    color:#ffe066;
+    font-size:10px;
+    opacity:0;
+    animation:twinkle ease-in-out infinite;
+    filter:drop-shadow(0 0 4px #ffe066);
+  }
+  @keyframes twinkle{
+    0%,100%{ opacity:0; transform:scale(0.5) rotate(0deg); }
+    50%{ opacity:1; transform:scale(1.1) rotate(20deg); }
+  }
+
+  /* --- Titulo neon --- */
+  .title-wrap{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    margin-top:6vh;
+  }
+  .neon-title{
+    font-size:clamp(24px, 8vw, 34px);
+    font-weight:800;
+    color:#fff9c4;
+    text-shadow:
+      0 0 6px var(--neon-glow),
+      0 0 14px var(--neon-glow),
+      0 0 26px #ffcc00,
+      0 0 46px #ff9d00;
+    letter-spacing:1px;
+    animation:flicker 3.4s infinite;
+    line-height:1.15;
+  }
+  @keyframes flicker{
+    0%,19%,21%,23%,54%,56%,100%{
+      text-shadow:
+        0 0 6px var(--neon-glow),
+        0 0 14px var(--neon-glow),
+        0 0 26px #ffcc00,
+        0 0 46px #ff9d00;
+      opacity:1;
+    }
+    20%,22%,55%{ opacity:0.55; text-shadow:none; }
+  }
+  .emoji-sun{
+    display:inline-block;
+    font-size:clamp(20px, 6vw, 30px);
+    animation:spinSlow 6s linear infinite;
+    filter:drop-shadow(0 0 10px #ffe066);
+  }
+  @keyframes spinSlow{
+    from{ transform:rotate(0deg); }
+    to{ transform:rotate(360deg); }
+  }
+
+  /* --- Mensaje --- */
+  .message{
+    position:relative;
+    z-index:2;
+    margin-top:18px;
+    color:#fff;
+    font-size:clamp(14px, 4.2vw, 17px);
+    font-weight:600;
+    text-align:center;
+    text-shadow:0 0 10px rgba(255,224,102,0.5);
+  }
+
+  /* --- Ramo de girasoles --- */
+  .bouquet-wrap{
+    position:relative;
+    z-index:2;
+    margin-top:auto;
+    margin-bottom:0;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    flex:1;
+    min-height:0;
+  }
+  .bouquet{
+    position:relative;
+    width:340px;
+    height:380px;
+    transform-origin:bottom center;
+  }
+  .flower{
+    position:absolute;
+    transform-origin:bottom center;
+  }
+  .stem-line{
+    position:absolute;
+    bottom:0;
+    left:50%;
+    width:5px;
+    background:linear-gradient(180deg,#4f9a2b,#2f6b1f);
+    transform:translateX(-50%);
+    border-radius:3px;
+  }
+  .bloom{
+    position:absolute;
+    left:50%;
+    animation:sway 3.6s ease-in-out infinite;
+    transform-origin:center bottom;
+  }
+  @keyframes sway{
+    0%,100%{ transform:rotate(-2deg); }
+    50%{ transform:rotate(2deg); }
+  }
+  .petal2{
+    position:absolute;
+    background:radial-gradient(circle at 35% 25%, #fff6b0, #ffd400 55%, #ffb300 100%);
+    box-shadow:0 0 10px rgba(255,215,0,0.55);
+  }
+  .core{
+    position:absolute;
+    border-radius:50%;
+    background:radial-gradient(circle at 38% 32%, #7a4d26, #3d260f 75%);
+    box-shadow:inset -4px -4px 8px rgba(0,0,0,0.5), 0 0 8px rgba(0,0,0,0.4);
+  }
+  .leaf-big{
+    position:absolute;
+    background:linear-gradient(135deg,#5cae34,#2f6b1f);
+    border-radius:0 85% 0 85%;
+    opacity:0.95;
+  }
+  .glow-ring{
+    position:absolute;
+    inset:-40%;
+    background:radial-gradient(circle, rgba(255,224,102,0.28) 0%, rgba(255,224,102,0) 70%);
+    z-index:-1;
+    animation:pulseGlow 3.6s ease-in-out infinite;
+  }
+  @keyframes pulseGlow{
+    0%,100%{ opacity:0.5; transform:scale(0.9); }
+    50%{ opacity:1; transform:scale(1.15); }
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="stars" id="stars"></div>
+
+  <div class="title-wrap">
+    <div class="neon-title">Flores<br>Para Ti <span class="emoji-sun">🌻</span></div>
+  </div>
+
+  <div class="message">Feliz 21 de septiembre ❤️</div>
+
+  <div class="bouquet-wrap">
+    <div class="bouquet" id="bouquet"></div>
+  </div>
+</div>
+
+<script>
+  // --- Estrellas ---
+  const starsLayer = document.getElementById('stars');
+  const starChars = ['✦','✧','⋆','✶'];
+  for(let i=0;i<40;i++){
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.textContent = starChars[Math.floor(Math.random()*starChars.length)];
+    s.style.left = Math.random()*100 + '%';
+    s.style.top = Math.random()*70 + '%';
+    s.style.fontSize = (8 + Math.random()*10) + 'px';
+    s.style.animationDuration = (1.8 + Math.random()*3) + 's';
+    s.style.animationDelay = (Math.random()*4) + 's';
+    starsLayer.appendChild(s);
+  }
+
+  // --- Ramo de girasoles ---
+  const bouquet = document.getElementById('bouquet');
+  const flowerSpecs = [
+    { x:160, h:220, s:1.15, delay:0 },
+    { x:70,  h:195, s:0.92, delay:0.3 },
+    { x:250, h:198, s:0.94, delay:0.6 },
+    { x:15,  h:160, s:0.75, delay:0.9 },
+    { x:305, h:165, s:0.76, delay:1.1 },
+    { x:115, h:145, s:0.68, delay:1.4 },
+    { x:205, h:145, s:0.68, delay:1.6 },
+  ];
+
+  // Hojas y tallos base del ramo
+  for(let i=0;i<5;i++){
+    const leaf = document.createElement('div');
+    leaf.className = 'leaf-big';
+    const lw = 70 + Math.random()*40, lh = 105 + Math.random()*40;
+    leaf.style.width = lw+'px';
+    leaf.style.height = lh+'px';
+    leaf.style.bottom = '0px';
+    leaf.style.left = (55 + i*50) + 'px';
+    leaf.style.transform = `rotate(${(i%2===0?-1:1)*(20+Math.random()*15)}deg)`;
+    bouquet.appendChild(leaf);
+  }
+
+  flowerSpecs.forEach(spec=>{
+    const flower = document.createElement('div');
+    flower.className = 'flower';
+    flower.style.left = spec.x + 'px';
+    flower.style.bottom = '0px';
+
+    const stem = document.createElement('div');
+    stem.className = 'stem-line';
+    stem.style.height = spec.h + 'px';
+    flower.appendChild(stem);
+
+    const bloom = document.createElement('div');
+    bloom.className = 'bloom';
+    bloom.style.bottom = spec.h + 'px';
+    bloom.style.left = '2.5px';
+    bloom.style.width = '0px';
+    bloom.style.height = '0px';
+    bloom.style.animationDelay = spec.delay + 's';
+
+    const glow = document.createElement('div');
+    glow.className = 'glow-ring';
+    bloom.appendChild(glow);
+
+    const petalCount = 12;
+    const petalLen = 82 * spec.s;
+    const petalWide = 27 * spec.s;
+    const radius = 7;
+
+    for(let i=0;i<petalCount;i++){
+      const angleDeg = i * (360/petalCount);
+      const angleRad = angleDeg * Math.PI/180;
+      const petal = document.createElement('div');
+      petal.className = 'petal2';
+      petal.style.width = petalLen+'px';
+      petal.style.height = petalWide+'px';
+      petal.style.left = (-petalLen/2)+'px';
+      petal.style.top = (-petalWide/2)+'px';
+      petal.style.borderRadius = '50% 50% 50% 50% / 60% 60% 40% 40%';
+      const x = Math.cos(angleRad)*radius;
+      const y = Math.sin(angleRad)*radius;
+      petal.style.transform = `translate(${x}px,${y}px) rotate(${angleDeg}deg)`;
+      bloom.appendChild(petal);
+    }
+
+    const core = document.createElement('div');
+    core.className = 'core';
+    const cs = 48*spec.s;
+    core.style.width = cs+'px';
+    core.style.height = cs+'px';
+    core.style.left = (-cs/2)+'px';
+    core.style.top = (-cs/2)+'px';
+    bloom.appendChild(core);
+
+    flower.appendChild(bloom);
+    bouquet.appendChild(flower);
+  });
+
+  // --- Reescalar el ramo para que siempre quepa en pantalla (móvil incluido) ---
+  function fitBouquet(){
+    const wrap = document.querySelector('.bouquet-wrap');
+    const availW = wrap.clientWidth * 0.94;
+    const availH = wrap.clientHeight * 0.98;
+    const baseW = 340, baseH = 380;
+    const scale = Math.min(1, availW / baseW, availH / baseH);
+    bouquet.style.transform = `scale(${scale})`;
+  }
+  window.addEventListener('resize', fitBouquet);
+  window.addEventListener('orientationchange', fitBouquet);
+  fitBouquet();
+  window.addEventListener('load', fitBouquet);
+
+</script>
+</body>
+</html>
